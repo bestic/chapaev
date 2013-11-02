@@ -70,7 +70,7 @@ var Game = function(players) {
 
   // checks if coordinates are out of the box
   this.checkForBoundaries = function(x, y) {
-      if () {
+      if (true) {
 
       }
   }
