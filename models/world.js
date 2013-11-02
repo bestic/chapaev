@@ -8,9 +8,7 @@ World = function () {
 
 }
 
-World.prototype.addChecker = function(x, y) {
-
-    var radius = 0.8;
+World.prototype.addChecker = function(x, y, radius) {
 
     // build fixture
     var circleFixDef = new box2d.b2FixtureDef;
