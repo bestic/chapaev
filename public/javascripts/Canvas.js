@@ -43,6 +43,8 @@ define(['jquery', 'domready'], function($, domready) {
                     this.board.clearRect(this.board_pos.x + (i+1)*this.cell_size, this.board_pos.y + (j+1)*this.cell_size, this.cell_size, this.cell_size);
                 }
             }
+            this.test_draw(Math.random());
+
         },
 
         calculateDimentions: function() {
@@ -60,8 +62,25 @@ define(['jquery', 'domready'], function($, domready) {
         resize: function() {
             this.calculateDimentions();
             this.reDraw();
+        },
+        test_draw:  function (delta) {
+
+            var time = new Date().getTime() * 0.002;
+            var x = Math.sin( time ) * 96 + 128 + delta*100;
+            var y = Math.cos( time * 0.9 ) * 96 + 128 + delta*100;
+
+//            this.board.fillStyle = 'rgb(245,245,245)';
+//            this.board.fillRect( 0, 0, 255, 255 );
+
+            this.board.fillStyle = 'rgb(255,0,0)';
+            this.board.beginPath();
+            this.board.arc( this.board_pos.x + x, this.board_pos.y + y, 10, 0, Math.PI * 2, true );
+            this.board.closePath();
+            this.board.fill();
+
         }
-    };
+
+};
 
     var frame = 0;
     var lastUpdateTime = 0;
@@ -70,16 +89,17 @@ define(['jquery', 'domready'], function($, domready) {
 
     function update() {
         requestAnimFrame(update);
+        canvas.reDraw();
 
-        var delta = Date.now() - lastUpdateTime;
-        if (acDelta > msPerFrame) {
-            acDelta = 0;
-            canvas.reDraw();
-        } else {
-            acDelta += delta;
-        }
-
-        lastUpdateTime = Date.now();
+//        var delta = Date.now() - lastUpdateTime;
+//        if (acDelta > msPerFrame) {
+//            acDelta = 0;
+//            canvas.reDraw();
+//        } else {
+//            acDelta += delta;
+//        }
+//
+//        lastUpdateTime = Date.now();
     }
 
 
