@@ -1,4 +1,4 @@
-define(['jquery', 'domready'], function($, domready) {
+define(['jquery', 'domready', 'Board'], function($, domready, Board) {
 
     var canvas = {
 
@@ -10,58 +10,47 @@ define(['jquery', 'domready'], function($, domready) {
         /*
          Canvas context
          */
-        board: undefined,
+        canvas: undefined,
 
-        /*
-        call size
-         */
-        cell_size: undefined,
-
-        board_pos: {
-
-        },
+        board: new Board(),
 
         init: function(el) {
             this.el = el;
 
-            this.board = this.el.getContext("2d");
-            this.calculateDimentions();
+            this.canvas = this.el.getContext("2d");
+            this.board.init(this.el)
         },
 
         reDraw: function() {
-
-            // border color
-            this.board.strokeStyle = '#B70A02';
-            this.board.strokeRect(this.board_pos.x - 10, this.board_pos.y - 10, 8*this.cell_size + 2*10, 8*this.cell_size + 2*10);
-            this.board.strokeRect(this.board_pos.x - 5, this.board_pos.y - 5, 8*this.cell_size + 2*5, 8*this.cell_size + 2*5);
-
-            this.board.fillStyle = '#AF5200'; // меняем цвет клеток
-            this.board.fillRect(this.board_pos.x, this.board_pos.y, 8*this.cell_size, 8*this.cell_size);
-            for (var i=0; i<8; i+=2) {
-                for (var j=0; j<8; j+=2) {
-                    this.board.clearRect(this.board_pos.x + i*this.cell_size, this.board_pos.y + j*this.cell_size, this.cell_size, this.cell_size);
-                    this.board.clearRect(this.board_pos.x + (i+1)*this.cell_size, this.board_pos.y + (j+1)*this.cell_size, this.cell_size, this.cell_size);
-                }
-            }
-        },
-
-        calculateDimentions: function() {
             this.el.width = this.el.parentNode.clientWidth;
             this.el.height = this.el.parentNode.clientHeight;
-
-            // 11 equal parts, 8 from which will be board
-            this.cell_size = this.el.height / 11;
-            this.board_pos = {
-                x: (this.el.width - this.cell_size*8)/2,
-                y: (this.el.height - this.cell_size*8)/2
-            }
+            this.board.reDraw();
+            this.test_draw()
         },
 
+
         resize: function() {
-            this.calculateDimentions();
             this.reDraw();
+        },
+        test_draw:  function () {
+
+            var time = new Date().getTime() * 0.002;
+            var x = Math.sin( time ) * 96 + 128;
+            var y = Math.cos( time * 0.9 ) * 96 + 128;
+
+//            this.board.fillStyle = 'rgb(245,245,245)';
+//            this.board.fillRect( 0, 0, 255, 255 );
+
+            this.canvas.fillStyle = 'rgb(255,0,0)';
+            this.canvas.beginPath();
+            this.canvas.arc( this.board.board_pos.x + x, this.board.board_pos.y + y, 10, 0, Math.PI * 2, true );
+            this.canvas.closePath();
+            this.canvas.fill();
+
         }
-    };
+
+};
+
 
     var frame = 0;
     var lastUpdateTime = 0;
@@ -70,25 +59,23 @@ define(['jquery', 'domready'], function($, domready) {
 
     function update() {
         requestAnimFrame(update);
+        canvas.reDraw();
 
-        var delta = Date.now() - lastUpdateTime;
-        if (acDelta > msPerFrame) {
-            acDelta = 0;
-            canvas.reDraw();
-        } else {
-            acDelta += delta;
-        }
-
-        lastUpdateTime = Date.now();
+//        var delta = Date.now() - lastUpdateTime;
+//        if (acDelta > msPerFrame) {
+//            acDelta = 0;
+//            canvas.reDraw();
+//        } else {
+//            acDelta += delta;
+//        }
+//
+//        lastUpdateTime = Date.now();
     }
-
-
-
 
     domready(function() {
         canvas.init(document.getElementById("board"));
         window.requestAnimFrame = (function(){
-            return  window.requestAnimationFrame       ||
+            return  window.requestAnimationFrame   ||
                 window.webkitRequestAnimationFrame ||
                 window.mozRequestAnimationFrame    ||
                 window.oRequestAnimationFrame      ||
