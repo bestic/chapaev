@@ -1,7 +1,7 @@
 require(['require.config'], function() {
 
 
-    require(['App'],function() {
+    require(['app'],function() {
 
 
 

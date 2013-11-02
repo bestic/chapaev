@@ -1,4 +1,0 @@
-define(['Canvas'], function($, canvas) {
-
-
-});
