@@ -3,12 +3,15 @@ define(['paper'], function(paper){
     return function() {
 
         this.RADIUS_SCALE = 0.8;
+        var self = this;
 
         // Can be pushed
         this.STATUS_ACTIVE = 'active';
         this.STATUS_MOVING = 'moving';
         this.STATUS_OUT = 'out';
 
+        this.canvas = undefined;
+        this.el = undefined;
 
         this.id = undefined;
         this.pos = {
@@ -26,8 +29,20 @@ define(['paper'], function(paper){
                 this.setRadius(options.radius);
             }
 
+            if (options.el) {
+                this.el = options.el;
+            }
+
+            if (options.canvas) {
+                this.setCanvas(options.canvas);
+            }
+
+
         };
 
+        this.setCanvas = function(canvas) {
+            this.canvas = canvas;
+        }
 
         this.setStatus = function(status) {
             this.status = status;
@@ -51,9 +66,18 @@ define(['paper'], function(paper){
         };
 
         this.reDraw = function() {
-            var p = new paper.Path.Circle(new paper.Point(this.pos.x, this.pos.y), this.radius);
-            p.fillColor = 'black';
+
+            this.canvas.fillStyle = 'rgb(0,0,0)';
+            this.canvas.beginPath();
+            this.canvas.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2, true);
+            this.canvas.closePath();
+            this.canvas.fill();
+
+
+
         };
+
+
 
 
 

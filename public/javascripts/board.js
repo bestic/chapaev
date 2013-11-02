@@ -1,4 +1,4 @@
-define(['checker'], function(Checker) {
+define(['jquery', 'checker'], function($, Checker) {
 
     return function() {
 
@@ -6,6 +6,7 @@ define(['checker'], function(Checker) {
          call size
          */
         this.cellSize = undefined;
+        var self = this;
 
         this.pos = {};
 
@@ -16,6 +17,10 @@ define(['checker'], function(Checker) {
         this.init = function(el) {
             this.el = el
             this.canvas = this.el.getContext("2d");
+
+            $(this.el).on('mousedown', this.onMouseDown);
+            $(this.el).on('mouseup', this.onMouseUp);
+            $(this.el).on('mouseout', this.onMouseUp);
         }
 
 
@@ -24,6 +29,10 @@ define(['checker'], function(Checker) {
             this.checkers = [];
             for (var i = 0; pos.length; i++) {
                 var checker = new Checker();
+                checker.init({
+                    'canvas': this.canvas,
+                    'el': this.el
+                });
                 checker.setRadius(this.cellSize/2);
                 checker.setPos(this.transform(pos[i].x, pos[i].y));
             }
@@ -51,7 +60,12 @@ define(['checker'], function(Checker) {
             }
 
             // Delete later
-            this.checkers.push(new Checker());
+            var checker = new Checker();
+            checker.init({
+                'canvas': this.canvas,
+                'el': this.el
+            });
+            this.checkers.push(checker);
             this.checkers[0].setRadius(this.cellSize/2);
             this.checkers[0].setPos(this.transform(4.5, 4.5));
 
@@ -59,6 +73,33 @@ define(['checker'], function(Checker) {
                 this.checkers[i].reDraw();
             }
 
+        },
+
+        this.onMouseDown = function(event) {
+
+            var pos = {
+                x: event.clientX,
+                y: event.clientY
+            }
+
+            for (var i = 0; i < self.checkers.length; i++) {
+                if (self.distance(self.checkers[i].getPos(), pos) <= self.checkers[i].radius) {
+                    self.startPos = pos;
+                    self.movedChecker = self.checker.id;
+                }
+            }
+
+        },
+
+        this.onMouseUp = function(event) {
+            var deltaX = self.startPos.x - event.clientX;
+            var deltaY = self.startPos.y - event.clientY;
+
+
+        },
+
+        this.distance = function(pos1, pos2) {
+            return Math.sqrt(Math.pow(pos1.x - pos2.x, 2) + Math.pow(pos1.y - pos2.y, 2));
         },
 
         this.transform = function(x, y) {
@@ -71,8 +112,6 @@ define(['checker'], function(Checker) {
                 y: resY
             }
 
-
-            
         }
 
 
