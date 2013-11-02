@@ -46,14 +46,48 @@ define(['domready'], function(domready) {
             this.el.height = this.el.parentNode.clientHeight;
             this.reDraw();
         }
-
     };
+
+    var frame = 0;
+    var lastUpdateTime = 0;
+    var acDelta = 0;
+    var msPerFrame = 100;
+
+    function update() {
+        requestAnimFrame(update);
+
+        var delta = Date.now() - lastUpdateTime;
+        if (acDelta > msPerFrame)
+        {
+            acDelta = 0;
+            canvas.reDraw();
+            frame++;
+            if (frame >= 6) frame = 0;
+        } else
+        {
+            acDelta += delta;
+        }
+
+        lastUpdateTime = Date.now();
+    }
+
 
 
 
     domready(function() {
         canvas.init(document.getElementById("board"));
-        canvas.reDraw();
+        window.requestAnimFrame = (function(){
+            return  window.requestAnimationFrame       ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame    ||
+                window.oRequestAnimationFrame      ||
+                window.msRequestAnimationFrame     ||
+                function( callback ){
+                    window.setTimeout(callback, 1000 / 60);
+                };
+        })();
+//        canvas.reDraw();
+        requestAnimFrame(update);
 
     });
 
