@@ -12,6 +12,11 @@ define(['canvas', 'jquery'], function(canvas, $) {
     statusEl.html(msg);
   });
 
+  socket.on('game_start', function(data) {
+    console.log('Game started');
+    // TODO enable board for interaction
+  });
+
 
   socket.on('message', function (data) {
     data = JSON.parse(data);

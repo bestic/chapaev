@@ -12,6 +12,7 @@ var Game = function(players) {
 
     this.players.forEach(function(player) {
       player.statusUpdate("Rock'N'Roll");
+      player.socket.emit('game_start', 'start');
     });
   };
 
