@@ -1,4 +1,4 @@
-define(['Canvas'], function(canvas) {
+define(['Canvas'], function($, canvas) {
 
 
 });
