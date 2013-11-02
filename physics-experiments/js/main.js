@@ -69,6 +69,9 @@ b2world.SetDebugDraw(debugDraw);
 
 function World() {
 
+    this.c = [];
+    this.restitutionFactor = 0.99;
+
     this.buildcircle = function(x, y, r) {
 
         // build fixture
@@ -81,6 +84,7 @@ function World() {
         // define car body
         var bodyDef = new b2BodyDef;
         bodyDef.type = b2Body.b2_dynamicBody;
+        bodyDef.fixedRotation = true;
         bodyDef.position.Set(x, y);
 
         //create circle
@@ -96,6 +100,17 @@ function World() {
 
     this.update = function() {
 
+        // emulate restitution
+        for (var i = 1; i < this.c.length; i++) {
+            var currentVelocity = this.c[i].GetLinearVelocity();
+            var newVelocity = new b2Vec2(
+                currentVelocity.x * this.restitutionFactor,
+                currentVelocity.y * this.restitutionFactor
+            );
+            this.c[i].SetLinearVelocity(newVelocity);
+        }
+
+        // update physics
         b2world.Step(
             1 / 60      //frame-rate
             ,  10       //velocity iterations
@@ -111,13 +126,12 @@ function World() {
 
     }
 
-    var c = [];
     for (var i = 1; i < 10; i++) {
         console.log(i);
-        c[i] = this.buildcircle(5 * i, 10);
+        this.c[i] = this.buildcircle(5 * i, 10, 1.5);
     }
 
-    c[1].ApplyImpulse(new b2Vec2(10, 0), new b2Vec2(0, 1));
+    this.c[1].ApplyImpulse(new b2Vec2(1000, 0), new b2Vec2(0, 1));
 }
 
 
