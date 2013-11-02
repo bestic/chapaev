@@ -1,11 +1,12 @@
 var models = require('../models');
 World = models.World;
+Checker = models.Checker;
 
 var Game = function(players) {
   this.players = players;
   this.world = null;
-  this.checkersPlaye1 = [];
-  this.checkersPlaye2 = [];
+  this.checkersPlayer1 = [];
+  this.checkersPlayer2 = [];
 
   this.player1Positions = [
       [0.5, 0.5],
@@ -34,18 +35,20 @@ var Game = function(players) {
       this.world = new World();
 
       // add player #1 checkers
-      this.player1Positions.forEach(function(item){
+      this.player1Positions.forEach(function (item) {
           var checkerId = self.world.addChecker(item[0], item[1]);
-          self.checkersPlaye1.push(checkerId);
+          var checker = new Checker(checkerId, item[0], item[1]);
+          self.checkersPlayer1[checkerId] = checker;
       });
 
       // add player #2 checkers
-      this.player2Positions.forEach(function(item){
+      this.player2Positions.forEach(function (item) {
           var checkerId = self.world.addChecker(item[0], item[1]);
-          self.checkersPlaye2.push(checkerId);
+          var checker = new Checker(checkerId, item[0], item[1]);
+          self.checkersPlayer2[checkerId] = checker;
       });
 
-    this.players.forEach(function(player) {
+    this.players.forEach(function (player) {
       player.statusUpdate("Rock'N'Roll");
       player.socket.emit('game_start', 'start');
     });
@@ -53,6 +56,46 @@ var Game = function(players) {
   };
 
   this.init();
+
+  //
+  this.updatecheckers = function() {
+
+     this.world.items.forEach(function(item, index){
+
+         var pos = item.getPosition();
+
+         // ugly check, improve in the future
+         if (this.checkersPlayer1[index]) {
+             this.checkersPlayer1[index].x = pos.x;
+             this.checkersPlayer1[index].y = pos.y;
+         }
+
+         if (this.checkersPlayer2[index]) {
+             this.checkersPlayer2[index].x = pos.x;
+             this.checkersPlayer2[index].y = pos.y;
+         }
+
+     });
+
+  };
+
+  // update the game, should be called periodically on server
+  this.update = function() {
+      // update world
+      this.world.update();
+
+      // update checkers positions according to physics
+      this.updatecheckers();
+
+      // Apply game rules
+
+      // TODO: check for checkers out of game board
+      // TODO: check for checkers that just have stopped, and pass it to the next turn
+
+      // TODO: share updated info with clients
+  };
+
+
 };
 
 module.exports = Game;
