@@ -1,4 +1,6 @@
 var io = require('socket.io');
+var models = require('../models');
+var Player = models.Player;
 
 exports.initialize = function(server) {
   io = io.listen(server);
@@ -9,17 +11,13 @@ exports.initialize = function(server) {
       message: 'Welcome to the most interesting chat room on earth!'}
     ));
 
-    socket.on('message', function(message){
-      console.log(message);
-      message= JSON.parse(message);
+    socket.on('initGame', function(message) {
+      console.log(io.sockets.clients().length);
+      //message= JSON.parse(message);
+    });
 
-      console.log(message.type);
-      if (message.type == "userMessage") {
-        console.log('This is user message');
-        socket.broadcast.send(JSON.stringify(message));
-        message.type = "myMessage";
-        socket.send(JSON.stringify(message));
-      }
+    socket.on('kick', function(message) {
+      console.log('Player made kick');
     });
   });
 };

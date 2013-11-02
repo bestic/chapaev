@@ -1,0 +1,1 @@
+exports.Player = require('./player');

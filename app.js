@@ -4,6 +4,7 @@ var express = require('express')
 
 var app = express();
 var server = app.listen(3000);
+var models = require('./models');
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
