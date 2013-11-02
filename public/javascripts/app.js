@@ -1,4 +1,4 @@
-define(['Canvas', 'jquery'], function(canvas, $) {
+define(['canvas', 'jquery'], function(canvas, $) {
 
   var socket = io.connect();
 
