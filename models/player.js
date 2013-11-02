@@ -12,17 +12,22 @@ var Player = function(socket) {
         player.name   = name;
         player.status = 'ready';
         console.log('Player set name as ' + name);
+        player.statusUpdate("You're ready for fight. Wait a moment!");
       }
     });
 
     this.socket.on('kick', function(data) {
       console.log('Player X made kick');
     });
-  }
+  };
+
+  this.statusUpdate = function(msg) {
+    this.socket.emit('status_update', msg);
+  };
 
   this.move = function(movement) {
     this.movements.puth(movement);
-  }
+  };
 
   this.init();
 };
