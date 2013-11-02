@@ -26,23 +26,21 @@ define(['jquery', 'domready'], function($, domready) {
 
             this.board = this.el.getContext("2d");
             this.calculateDimentions();
-
-
         },
 
         reDraw: function() {
 
             // border color
             this.board.strokeStyle = '#B70A02';
-//            this.board.strokeRect(this.cell_size, this.cell_size, 9*this.cell_size, 9*this.cell_size);
-//            this.board.strokeRect(18, 18, 8*this.cell_size + this.cell_size/3, 8*this.cell_size + this.cell_size/3);
+            this.board.strokeRect(this.board_pos.x - 10, this.board_pos.y - 10, 8*this.cell_size + 2*10, 8*this.cell_size + 2*10);
+            this.board.strokeRect(this.board_pos.x - 5, this.board_pos.y - 5, 8*this.cell_size + 2*5, 8*this.cell_size + 2*5);
 
             this.board.fillStyle = '#AF5200'; // меняем цвет клеток
             this.board.fillRect(this.board_pos.x, this.board_pos.y, 8*this.cell_size, 8*this.cell_size);
             for (var i=0; i<8; i+=2) {
                 for (var j=0; j<8; j+=2) {
-//                    this.board.clearRect(this.cell_size + i*this.cell_size, this.cell_size + j*this.cell_size, this.cell_size, this.cell_size);
-//                    this.board.clearRect(this.cell_size + (i+1)*this.cell_size, this.cell_size + (j+1)*this.cell_size, this.cell_size, this.cell_size);
+                    this.board.clearRect(this.board_pos.x + i*this.cell_size, this.board_pos.y + j*this.cell_size, this.cell_size, this.cell_size);
+                    this.board.clearRect(this.board_pos.x + (i+1)*this.cell_size, this.board_pos.y + (j+1)*this.cell_size, this.cell_size, this.cell_size);
                 }
             }
         },
@@ -74,14 +72,10 @@ define(['jquery', 'domready'], function($, domready) {
         requestAnimFrame(update);
 
         var delta = Date.now() - lastUpdateTime;
-        if (acDelta > msPerFrame)
-        {
+        if (acDelta > msPerFrame) {
             acDelta = 0;
             canvas.reDraw();
-            frame++;
-            if (frame >= 6) frame = 0;
-        } else
-        {
+        } else {
             acDelta += delta;
         }
 
