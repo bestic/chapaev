@@ -8,6 +8,9 @@ var Game = function(players) {
   this.checkersPlayer1 = [];
   this.checkersPlayer2 = [];
 
+
+  // game data
+  this.radius = 0.8;
   this.player1Positions = [
       [0.5, 0.5],
       [0.5, 1.5],
@@ -18,7 +21,6 @@ var Game = function(players) {
       [0.5, 6.5],
       [0.5, 7.5]
   ];
-
   this.player2Positions = [
       [7.5, 0.5],
       [7.5, 1.5],
@@ -29,6 +31,10 @@ var Game = function(players) {
       [7.5, 6.5],
       [7.5, 7.5]
   ];
+  this.boundaryBox = [
+      [0, 0],
+      [8, 8]
+  ];
 
   this.init = function() {
       var self = this;
@@ -36,14 +42,14 @@ var Game = function(players) {
 
       // add player #1 checkers
       this.player1Positions.forEach(function (item) {
-          var checkerId = self.world.addChecker(item[0], item[1]);
+          var checkerId = self.world.addChecker(item[0], item[1], self.radius);
           var checker = new Checker(checkerId, item[0], item[1]);
           self.checkersPlayer1[checkerId] = checker;
       });
 
       // add player #2 checkers
       this.player2Positions.forEach(function (item) {
-          var checkerId = self.world.addChecker(item[0], item[1]);
+          var checkerId = self.world.addChecker(item[0], item[1], self.radius);
           var checker = new Checker(checkerId, item[0], item[1]);
           self.checkersPlayer2[checkerId] = checker;
       });
@@ -61,6 +67,13 @@ var Game = function(players) {
   };
 
   this.init();
+
+  // checks if coordinates are out of the box
+  this.checkForBoundaries = function(x, y) {
+      if () {
+
+      }
+  }
 
   //
   this.updatecheckers = function() {
