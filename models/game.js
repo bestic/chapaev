@@ -7,6 +7,7 @@ var Game = function(players) {
   this.world = null;
   this.checkersPlayer1 = [];
   this.checkersPlayer2 = [];
+  this.updateTimeout = 200;
 
 
   // game data
@@ -64,6 +65,7 @@ var Game = function(players) {
       }
     });
 
+    setInterval(function() { self.update() }, this.updateTimeout);
   };
 
   this.init();
@@ -99,6 +101,8 @@ var Game = function(players) {
 
   // update the game, should be called periodically on server
   this.update = function() {
+      console.log('Update checkers positions');
+      return;
       // update world
       this.world.update();
 
