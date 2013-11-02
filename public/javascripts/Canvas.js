@@ -1,4 +1,4 @@
-define(['jquery', 'domready', 'Board'], function($, domready, Board) {
+define(['jquery', 'domready', 'board'], function($, domready, Board) {
 
     var canvas = {
 
