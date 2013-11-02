@@ -48,9 +48,14 @@ var Game = function(players) {
           self.checkersPlayer2[checkerId] = checker;
       });
 
-    this.players.forEach(function (player) {
+    this.players.forEach(function (player, index) {
       player.statusUpdate("Rock'N'Roll");
       player.socket.emit('game_start', 'start');
+      if (index) {
+        player.sendUpdate(self.player2Positions, self.player1Positions);
+      } else {
+        player.sendUpdate(self.player1Positions, self.player2Positions);
+      }
     });
 
   };

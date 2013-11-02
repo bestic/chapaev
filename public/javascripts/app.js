@@ -17,6 +17,11 @@ define(['canvas', 'jquery'], function(canvas, $) {
     // TODO enable board for interaction
   });
 
+  socket.on('update', function(data) {
+    console.log('Updated position');
+    console.log(data);
+    // TODO update checkers on board
+  });
 
   socket.on('message', function (data) {
     data = JSON.parse(data);

@@ -29,7 +29,11 @@ var Player = function(socket) {
   };
 
   this.move = function(movement) {
-    this.movements.puth(movement);
+    this.movements.push(movement);
+  };
+
+  this.sendUpdate = function(checkers, rivalCheckers) {
+    this.socket.emit('update', { own: checkers, rival: rivalCheckers });
   };
 
   this.init();
