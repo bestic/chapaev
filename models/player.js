@@ -1,9 +1,14 @@
-var Player = function() {
+var Player = function(socket) {
   // possible values 'waiting', 'game', 'finished'
+  this.socket = socket;
   this.status = 'waiting';
+  this.movements = [];
 
   this.init = function() {
-    console.log('Hello');
+  }
+
+  this.move = function(movement) {
+    this.movements.puth(movement);
   }
 };
 
