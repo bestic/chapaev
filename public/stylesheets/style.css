@@ -1,7 +1,16 @@
 body {
-    position: absolute;
-    padding: 0;
-    margin: 0;
-    height: 100%;
-    width: 100%;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.control-group {
+  position: absolute;
+  margin: 20px;
+}
+
+.text-field {
+  width: 150px;
 }
