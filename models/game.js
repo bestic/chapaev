@@ -4,11 +4,15 @@ World = models.World;
 var Game = function(players) {
   this.players = players;
   this.world = null;
+  var game = this;
 
   this.init = function() {
-      this.world = new World();
-      console.log('New game started');
-      console.log(this.world);
+    this.world = new World();
+    console.log('New game started');
+
+    this.players.forEach(function(player) {
+      player.statusUpdate("Rock'N'Roll");
+    });
   };
 
   this.init();
