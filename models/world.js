@@ -32,9 +32,11 @@ World.prototype.addChecker = function(x, y) {
     circle1.CreateFixture(circleFixDef);
 
     this.items.push(circle1);
-    return this.items.indexOf(circle1);
-}
+    var index = this.items.indexOf(circle1);
 
+    circle1.SetUserData({id: index});
+    return index;
+}
 
 World.prototype.update = function() {
 
