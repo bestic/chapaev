@@ -1,0 +1,20 @@
+html, body, canvas {
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+    display: block;
+}
+
+canvas:full-screen {
+    width: 100% !important;
+}
+
+canvas:-webkit-full-screen {
+    width: 100% !important;
+}
+
+#cam {
+    border: 1px solid silver;
+}
