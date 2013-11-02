@@ -2,8 +2,8 @@ define(['Canvas', 'jquery'], function(canvas, $) {
 
   var socket = io.connect();
 
-  $('#set-name').on('click', function() {
-    console.log('set name');
+  $('#set-name').on('click', function(el) {
+    socket.emit('set_name', $('#player_name').val());
   });
 
 
