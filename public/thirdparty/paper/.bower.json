@@ -1,0 +1,33 @@
+{
+  "name": "paper",
+  "version": "0.9.10",
+  "main": "dist/paper.js",
+  "ignore": [
+    "build",
+    "components",
+    "dist/paper-node.js",
+    "fatline",
+    "projects",
+    "node_modules",
+    "package.json",
+    "src",
+    "test"
+  ],
+  "devDependencies": {
+    "straps": "~1.2.0",
+    "acorn": "git://github.com/paperjs/acorn#0.3.2",
+    "esprima": "~1.0.3",
+    "stats.js": "r11"
+  },
+  "homepage": "https://github.com/paperjs/paper.js",
+  "_release": "0.9.10",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.9.10",
+    "commit": "825a090e6b9302e3cf1736421c3b3c9d6570489e"
+  },
+  "_source": "git://github.com/paperjs/paper.js.git",
+  "_target": "~0.9.10",
+  "_originalSource": "paper",
+  "_direct": true
+}

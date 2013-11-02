@@ -1,0 +1,22 @@
+{
+  "name": "paper",
+  "version": "0.9.9",
+  "main": "dist/paper.js",
+  "ignore": [
+    "build",
+    "components",
+    "dist/paper-node.js",
+    "fatline",
+    "projects",
+    "node_modules",
+    "package.json",
+    "src",
+    "test"
+  ],
+  "devDependencies": {
+    "straps": "~1.2.0",
+    "acorn": "git://github.com/paperjs/acorn#0.3.2",
+    "esprima": "~1.0.3",
+    "stats.js": "r11"
+  }
+}
