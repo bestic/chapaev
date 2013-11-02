@@ -6,7 +6,7 @@ socket.on('message', function (data) {
   console.log('I got message from server');
   console.log(data);
 
-  socket.emit('initGame', {data: 'Test data', type: 'userMessage'});
+  socket.emit('kick', {data: 'Test data', type: 'userMessage'});
 });
 
 //socket.send(JSON.stringify({data: 'Test data', type: 'userMessage'}));

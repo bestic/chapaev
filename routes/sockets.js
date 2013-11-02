@@ -9,6 +9,7 @@ exports.initialize = function(server) {
 
   io.sockets.on("connection", function(socket) {
     var player = new Player(socket);
+
     if (waitingPlayer) {
       new Game([player, waitingPlayer]);
       waitingPlayer = null;
@@ -22,10 +23,6 @@ exports.initialize = function(server) {
     ));
 
     socket.on('initGame', function(message) {
-    });
-
-    socket.on('kick', function(message) {
-      console.log('Player made kick');
     });
   });
 };
