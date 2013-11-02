@@ -14,3 +14,10 @@ body {
 .text-field {
   width: 150px;
 }
+
+.game-status {
+  color: green;
+  margin: 10px 0;
+  font-size: 12px;
+  font-family: Arial;
+}

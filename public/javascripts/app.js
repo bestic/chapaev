@@ -1,14 +1,15 @@
 define(['canvas', 'jquery'], function(canvas, $) {
 
-  var socket = io.connect();
+  var socket   = io.connect()
+    , statusEl = $('#game_status');
 
   $('#set-name').on('click', function(el) {
     socket.emit('set_name', $('#player_name').val());
   });
 
 
-  socket.on('connection', function(data) {
-    console.log('Start connection');
+  socket.on('status_update', function(msg) {
+    statusEl.html(msg);
   });
 
 
