@@ -23,5 +23,9 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 
+io.sockets.on('connection', function (socket) {
+  console.log('A new user connected!');
+  socket.emit('info', { msg: 'The world is round, there is no up or down.' });
+});
 
 console.log("Express server listening on port 3000");
