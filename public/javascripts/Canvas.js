@@ -1,4 +1,4 @@
-define(['jquery', 'domready', 'board'], function($, domready, Board) {
+define(['jquery', 'domready', 'board', 'paper'], function($, domready, Board) {
 
     var canvas = {
 
@@ -32,6 +32,8 @@ define(['jquery', 'domready', 'board'], function($, domready, Board) {
         resize: function() {
             this.reDraw();
         },
+
+
         test_draw:  function () {
 
             var time = new Date().getTime() * 0.002;
