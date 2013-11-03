@@ -81,6 +81,10 @@ define(['paper'], function(paper){
 
         this.reDraw = function() {
 
+            if (!this.status) {
+                return;
+            }
+
             this.canvas.fillStyle = this.color;
             this.canvas.beginPath();
             this.canvas.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2, true);

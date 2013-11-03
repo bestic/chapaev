@@ -59,7 +59,7 @@ define(['jquery', 'checker'], function($, Checker) {
                 checker.setPos(this.transform(pos[i].x, pos[i].y));
                 this.checkers.push(checker);
             }
-            console.log('out:' + out_count);
+            //console.log('out:' + out_count);
         },
 
         this.reDraw = function() {
@@ -159,18 +159,6 @@ define(['jquery', 'checker'], function($, Checker) {
             $('.own').html(ownNumber);
             $('.rival').html(rivalNumber);
 //            $('.win').html('')
-
-            if (ownNumber <= 0) {
-                $('.win').html('Наши победили')
-            }
-
-            if (rivalNumber <= 0) {
-                $('.win').html('Наши проиграли')
-            }
-
-            if (ownNumber <= 0 && rivalNumber <= 0) {
-                $('.win').html('Ничья!')
-            }
 
         }
 
