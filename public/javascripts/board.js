@@ -21,7 +21,6 @@ define(['jquery', 'checker'], function($, Checker) {
 
             $(this.el).on('mousedown', this.onMouseDown);
             $(this.el).on('mouseup', this.onMouseUp);
-            $(this.el).on('mouseout', this.onMouseUp);
         }
 
         this.setSocket = function(socket) {
@@ -97,18 +96,18 @@ define(['jquery', 'checker'], function($, Checker) {
 
             if (self.startPos && self.startPos.x && self.startPos.y) {
 
-                var pos = {
-                    x: Math.abs(self.startPos.x - event.clientX),
-                    y: Math.abs(self.startPos.y - event.clientY)
-                }
 
-                pos = self.backTransform(pos);
+                pos = self.backTransform(self.startPos.x - event.clientX, self.startPos.y - event.clientY);
 
-                this.socket.emit('kick', JSON.stringify({
-                    'x': pos.x,
-                    'y': pos.y,
+                self.socket.emit('kick', JSON.stringify({
+                    'vector': {
+                        'x': pos.x,
+                        'y': pos.y
+                    },
                     'id': self.movedChecker
                 }));
+
+                self.startPos = null;
             }
 
 
@@ -133,8 +132,8 @@ define(['jquery', 'checker'], function($, Checker) {
 
         this.backTransform = function(x, y) {
 
-            var resX = (x - this.pos.x) / this.cellSize;
-            var resY = (y - this.pos.y) / this.cellSize;
+            var resX = x / this.cellSize;
+            var resY = y / this.cellSize;
 
             return {
                 x: resX,
