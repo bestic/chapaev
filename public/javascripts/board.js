@@ -9,6 +9,7 @@ define(['jquery', 'checker'], function($, Checker) {
         var self = this;
 
         this.pos = {};
+        this.prevData = [];
 
         this.canvas = undefined;
 
@@ -24,17 +25,19 @@ define(['jquery', 'checker'], function($, Checker) {
         }
 
 
-        this.updateCheckersPos = function(pos) {
-
+        this.updateCheckersPos = function(data) {
+            var pos = data.rival.concat(data.own);
+            this.prevData = pos;
             this.checkers = [];
-            for (var i = 0; pos.length; i++) {
+            for (var i = 0; i < pos.length; i++) {
                 var checker = new Checker();
                 checker.init({
                     'canvas': this.canvas,
                     'el': this.el
                 });
                 checker.setRadius(this.cellSize/2);
-                checker.setPos(this.transform(pos[i].x, pos[i].y));
+                checker.setPos(this.transform(pos[i][0], pos[i][1]));
+                this.checkers.push(checker);
             }
         },
 
@@ -59,17 +62,10 @@ define(['jquery', 'checker'], function($, Checker) {
                 }
             }
 
-            // Delete later
-            var checker = new Checker();
-            checker.init({
-                'canvas': this.canvas,
-                'el': this.el
-            });
-            this.checkers.push(checker);
-            this.checkers[0].setRadius(this.cellSize/2);
-            this.checkers[0].setPos(this.transform(4.5, 4.5));
-
             for (var i = 0; i < this.checkers.length; i++) {
+                this.checkers[i].setPos(this.transform(this.prevData[i][0], this.prevData[i][1]));
+                this.checkers[i].setRadius(this.cellSize/2);
+
                 this.checkers[i].reDraw();
             }
 
@@ -92,8 +88,11 @@ define(['jquery', 'checker'], function($, Checker) {
         },
 
         this.onMouseUp = function(event) {
-            var deltaX = self.startPos.x - event.clientX;
-            var deltaY = self.startPos.y - event.clientY;
+
+            if (self.startPos && self.startPos.x && self.startPos.y) {
+                var deltaX = self.startPos.x - event.clientX;
+                var deltaY = self.startPos.y - event.clientY;
+            }
 
 
         },

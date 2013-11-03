@@ -79,7 +79,7 @@ define(['jquery', 'domready', 'board', 'paper'], function($, domready, Board, pa
     var msPerFrame = 100;
 
     function update() {
-//        requestAnimFrame(update);
+        requestAnimFrame(update);
         canvas.reDraw();
 
 //        var delta = Date.now() - lastUpdateTime;
@@ -117,5 +117,6 @@ define(['jquery', 'domready', 'board', 'paper'], function($, domready, Board, pa
     });
 
 
+    return canvas;
 
 });
