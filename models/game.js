@@ -39,7 +39,7 @@ var Game = function(players) {
 
   this.init = function() {
       var self = this;
-      this.world = new World();
+      this.world = new World(this.updateTimeout);
 
       // add player #1 checkers
       this.player1Positions.forEach(function (item) {

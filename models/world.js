@@ -1,6 +1,8 @@
 var box2d = require('box2dweb-commonjs');
 
-World = function () {
+World = function (timeout) {
+
+    this.timeout = 1000 / timeout;
 
     this.b2world = new box2d.b2World(
         new box2d.b2Vec2(0, 0),   //gravity
@@ -67,7 +69,7 @@ World.prototype.update = function() {
 
     // update physics
     this.b2world.Step(
-        1 / 17      //frame-rate
+        1 / this.timeout //frame-rate
         ,  3       //velocity iterations
         ,  5       //position iterations
     );
