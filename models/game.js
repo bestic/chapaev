@@ -7,7 +7,7 @@ var Game = function(players) {
   this.world = null;
   this.checkersPlayer1 = [];
   this.checkersPlayer2 = [];
-  this.updateTimeout = 30;
+  this.updateTimeout = 50;
 
 
   // game data
@@ -80,23 +80,24 @@ var Game = function(players) {
 
   //
   this.updatecheckers = function() {
-     var self = this;
-     this.world.items.forEach(function(item, index){
+    var self = this;
 
-         var pos = item.GetPosition();
+    this.world.items.forEach(function(item, index) {
 
-         // ugly check, improve in the future
-         if (typeof self.checkersPlayer1[index] !== 'undefined') {
-             self.checkersPlayer1[index].x = pos.x;
-             self.checkersPlayer1[index].y = pos.y;
-         }
+      var pos = item.GetPosition();
+      var id  = item.GetUserData().id;
+      var ind = index % 8;
 
-         if (typeof self.checkersPlayer2[index] !== 'undefined') {
-             self.checkersPlayer2[index].x = pos.x;
-             self.checkersPlayer2[index].y = pos.y;
-         }
-
-     });
+      if (index > 7) {
+        self.checkersPlayer1[ind].x = pos.x;
+        self.checkersPlayer1[ind].y = pos.y;
+        self.checkersPlayer1[ind].id = id;
+      } else {
+        self.checkersPlayer2[ind].x = pos.x;
+        self.checkersPlayer2[ind].y = pos.y;
+        self.checkersPlayer2[ind].id = id;
+      }
+    });
 
   };
 
