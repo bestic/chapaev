@@ -3,7 +3,7 @@ var box2d = require('box2dweb-commonjs');
 World = function () {
 
     this.b2world = new box2d.b2World(
-        new box2d.b2Vec2(0, 10),   //gravity
+        new box2d.b2Vec2(0, 0),   //gravity
         true                 //allow sleep
     );
     this.restitutionFactor = 0.99;
