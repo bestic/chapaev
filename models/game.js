@@ -59,9 +59,9 @@ var Game = function(players) {
       player.statusUpdate("Rock'N'Roll");
       player.socket.emit('game_start', 'start');
       if (index) {
-        player.sendUpdate(self.player2Positions, self.player1Positions);
+        player.sendUpdate(self.checkersPlayer2, self.checkersPlayer1);
       } else {
-        player.sendUpdate(self.player1Positions, self.player2Positions);
+        player.sendUpdate(self.checkersPlayer1, self.checkersPlayer2);
       }
     });
 

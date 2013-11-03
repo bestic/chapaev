@@ -1,8 +1,8 @@
-var Checker = function() {
-    this.id = null;
+var Checker = function(id, x, y) {
+    this.id = id;
     this.ready = false;
-    this.x = 0;
-    this.y = 0;
+    this.x = x;
+    this.y = y;
 }
 
 module.exports = Checker;
