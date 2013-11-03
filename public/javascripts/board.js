@@ -117,7 +117,7 @@ define(['jquery', 'checker'], function($, Checker) {
         this.onMouseUp = function(event) {
 
             if (self.startPos && self.startPos.x && self.startPos.y) {
-
+                var power = $('.power-indicator').val();
                 var pos = self.backTransform(self.startPos.x - event.clientX, self.startPos.y - event.clientY);
                 var data = {
                     'vector': {
