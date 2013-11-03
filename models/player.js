@@ -1,12 +1,11 @@
-var events = require('events');
-
-var Player = function(socket) {
+var Player = function(socket, callback) {
   // possible values 'waiting', 'game', 'finished'
   this.socket = socket;
   this.status = 'not_ready';
   this.name   = '';
   this.game   = null;
   this.movements = [];
+  this.callback = callback;
   var player = this;
 
   this.init = function() {
@@ -17,7 +16,7 @@ var Player = function(socket) {
         console.log('Player set name as ' + name);
         player.statusUpdate("You're ready for fight. Wait a moment!");
 
-        player.emit('ready', player);
+        player.callback();
       }
     });
 
@@ -40,7 +39,5 @@ var Player = function(socket) {
 
   this.init();
 };
-
-Player.prototype = new events.EventEmitter;
 
 module.exports = Player;
