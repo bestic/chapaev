@@ -21,6 +21,7 @@ var Player = function(socket, callback) {
     });
 
     this.socket.on('kick', function(data) {
+      console.log(player.game);
       player.game.world.kickChecker(data.id, data.vector);
     });
   };

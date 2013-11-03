@@ -102,20 +102,21 @@ var Game = function(players) {
 
   // update the game, should be called periodically on server
   this.update = function() {
-      console.log('Update checkers positions');
+    console.log('Update checkers positions');
 
-      // update world
-      this.world.update();
+    // update world
+    this.world.update();
 
-      // update checkers positions according to physics
-      this.updatecheckers();
+    // update checkers positions according to physics
+    this.updatecheckers();
 
-      // Apply game rules
+    // Apply game rules
 
-      // TODO: check for checkers out of game board
-      // TODO: check for checkers that just have stopped, and pass it to the next turn
+    // TODO: check for checkers out of game board
+    // TODO: check for checkers that just have stopped, and pass it to the next turn
 
-      // TODO: share updated info with clients
+    this.players[0].sendUpdate(this.checkersPlayer1, this.checkersPlayer2);
+    this.players[1].sendUpdate(this.checkersPlayer2, this.checkersPlayer1);
   };
 
   this.end = function() {
