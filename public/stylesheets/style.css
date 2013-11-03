@@ -4,6 +4,7 @@ body {
   margin: 0;
   height: 100%;
   width: 100%;
+  text-rendering: optimizelegibility;
 }
 
 .control-group {
@@ -53,4 +54,11 @@ body {
 
 .loose {
     color: green
+}
+
+.indicator {
+  position: absolute;
+  top: 72%;
+  right: 22%;
+  z-index: 100;  
 }

@@ -1,4 +1,4 @@
-define(['canvas', 'jquery'], function(canvas, $) {
+define(['canvas', 'jquery', 'knob'], function(canvas, $, knob) {
 
   var socket   = io.connect()
     , statusEl = $('#game_status');
@@ -17,8 +17,8 @@ define(['canvas', 'jquery'], function(canvas, $) {
 
   socket.on('game_start', function(data) {
     console.log('Game started');
+    $('.indicator').show();
     canvas.board.setGameStatus(true);
-      // TODO enable board for interaction
   });
 
   socket.on('game_end', function(data) {
@@ -38,8 +38,20 @@ define(['canvas', 'jquery'], function(canvas, $) {
 
   socket.on('update', function(data) {
     canvas.board.updateCheckersPos(data);
-    // console.log('Updated position');
-    // console.log(data);
-    // TODO update checkers on board
   });
+
+  $('.indicator').hide();
+
+  var indicator = $('.power-indicator');
+
+  indicator.knob({});
+  function powerIndicator() {
+    var next = parseInt(indicator.val()) + 1;
+    if (next == 100) {
+      next = 0;
+    }
+    indicator.val(next).trigger('change');
+    setTimeout(powerIndicator, 5);
+  }
+  powerIndicator();
 });
