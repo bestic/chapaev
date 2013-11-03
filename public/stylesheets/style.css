@@ -62,3 +62,7 @@ body {
   right: 22%;
   z-index: 100;  
 }
+
+.score {
+    display: none;
+}
