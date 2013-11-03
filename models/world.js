@@ -16,7 +16,7 @@ World.prototype.addChecker = function(x, y, radius) {
     // build fixture
     var circleFixDef = new box2d.b2FixtureDef;
     circleFixDef.density = 1;
-    circleFixDef.friction = 10;
+    circleFixDef.friction = 0.2;
     circleFixDef.restitution = 0.7;
     // circleFixDef.filter.groupIndex = -1;
 
@@ -41,7 +41,8 @@ World.prototype.addChecker = function(x, y, radius) {
 
 World.prototype.kickChecker = function(id, vector) {
 
-    var force = 300;
+    var force = 1;
+
     var x = vector.x * force;
     var y = vector.y * force;
     console.log(x, y);
@@ -66,9 +67,9 @@ World.prototype.update = function() {
 
     // update physics
     this.b2world.Step(
-        1 / 5      //frame-rate
-        ,  10       //velocity iterations
-        ,  10       //position iterations
+        1 / 17      //frame-rate
+        ,  3       //velocity iterations
+        ,  5       //position iterations
     );
     this.b2world.ClearForces();
 

@@ -7,11 +7,11 @@ var Game = function(players) {
   this.world = null;
   this.checkersPlayer1 = [];
   this.checkersPlayer2 = [];
-  this.updateTimeout = 2000;
+  this.updateTimeout = 30;
 
 
   // game data
-  this.radius = 0.8;
+  this.radius = 0.4;
   this.player1Positions = [
       [0.5, 0.5],
       [1.5, 0.5],
