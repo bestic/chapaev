@@ -122,8 +122,10 @@ var Game = function(players) {
     if (this.checkersPlayer2.length) {
       winId = 1;
     }
-    //var winner = this.players[];
-    //var loser  = this.players[] 
+    var winner = this.players[winId];
+    var loser  = this.players[!winId + 0];
+    winner.socket.on('game_end', 'You won! Congratulations!!!');
+    loser.socket.on('game_end', 'You lose!');
   };
 };
 
