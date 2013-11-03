@@ -74,7 +74,7 @@ define(['jquery', 'checker'], function($, Checker) {
             this.canvas.strokeRect(this.pos.x - 10, this.pos.y - 10, 8*this.cellSize + 2*10, 8*this.cellSize + 2*10);
             this.canvas.strokeRect(this.pos.x - 5, this.pos.y - 5, 8*this.cellSize + 2*5, 8*this.cellSize + 2*5);
 
-            this.canvas.fillStyle = '#AF5200'; // меняем цвет клеток
+            this.canvas.fillStyle = '#AF5200';
             this.canvas.fillRect(this.pos.x, this.pos.y, 8*this.cellSize, 8*this.cellSize);
             for (var i=0; i<8; i+=2) {
                 for (var j=0; j<8; j+=2) {

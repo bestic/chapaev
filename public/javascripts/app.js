@@ -16,6 +16,7 @@ define(['canvas', 'jquery', 'knob'], function(canvas, $, knob) {
   });
 
   socket.on('game_start', function(data) {
+    $('.oponent').html(data + " joined you in game");
     console.log('Game started');
     $('.indicator').show();
     canvas.board.setGameStatus(true);

@@ -45,10 +45,10 @@ define(['paper'], function(paper){
 
             if (options.owner) {
                 this.owner = true;
-                this.color = '#F00';
+
             } else {
                 this.owner = false;
-                this.color = '#000';
+
             }
 
 
@@ -85,15 +85,90 @@ define(['paper'], function(paper){
                 return;
             }
 
-            this.canvas.fillStyle = this.color;
-            this.canvas.beginPath();
-            this.canvas.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2, true);
-            this.canvas.closePath();
-            this.canvas.fill();
+            if (this.owner) {
+
+                this.canvas.fillStyle = '#F00';
+                this.canvas.beginPath();
+                this.canvas.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2, true);
+                this.canvas.closePath();
+                this.canvas.fill();
+
+                this.canvas.strokeStyle = '#874747';
+                this.canvas.beginPath();
+                this.canvas.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2, true);
+                this.canvas.closePath();
+                this.canvas.stroke();
+
+                this.canvas.strokeStyle = '#874747';
+                this.canvas.beginPath();
+                this.canvas.arc(this.pos.x, this.pos.y, this.radius / 1.5, 0, Math.PI * 2, true);
+                this.canvas.closePath();
+                this.canvas.stroke();
+
+                this.canvas.strokeStyle = '#874747';
+                this.canvas.beginPath();
+                this.canvas.arc(this.pos.x, this.pos.y, this.radius / 2, 0, Math.PI * 2, true);
+                this.canvas.closePath();
+                this.canvas.stroke();
+
+                this.canvas.strokeStyle = '#874747';
+                this.canvas.beginPath();
+                this.canvas.arc(this.pos.x, this.pos.y, this.radius / 3, 0, Math.PI * 2, true);
+                this.canvas.closePath();
+                this.canvas.stroke();
+
+                this.canvas.strokeStyle = '#874747';
+                this.canvas.beginPath();
+                this.canvas.arc(this.pos.x, this.pos.y, this.radius / 4, 0, Math.PI * 2, true);
+                this.canvas.closePath();
+                this.canvas.stroke();
+
+
+
+            } else {
+
+                this.canvas.fillStyle = '#444';
+                this.canvas.beginPath();
+                this.canvas.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2, true);
+                this.canvas.closePath();
+                this.canvas.fill();
+
+                this.canvas.strokeStyle = '#a4a4a4';
+                this.canvas.beginPath();
+                this.canvas.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2, true);
+                this.canvas.closePath();
+                this.canvas.stroke();
+
+                this.canvas.strokeStyle = '#a4a4a4';
+                this.canvas.beginPath();
+                this.canvas.arc(this.pos.x, this.pos.y, this.radius / 1.5, 0, Math.PI * 2, true);
+                this.canvas.closePath();
+                this.canvas.stroke();
+
+                this.canvas.strokeStyle = '#a4a4a4';
+                this.canvas.beginPath();
+                this.canvas.arc(this.pos.x, this.pos.y, this.radius / 2, 0, Math.PI * 2, true);
+                this.canvas.closePath();
+                this.canvas.stroke();
+
+                this.canvas.strokeStyle = '#a4a4a4';
+                this.canvas.beginPath();
+                this.canvas.arc(this.pos.x, this.pos.y, this.radius / 3, 0, Math.PI * 2, true);
+                this.canvas.closePath();
+                this.canvas.stroke();
+
+                this.canvas.fillStyle = '#a4a4a4';
+                this.canvas.beginPath();
+                this.canvas.arc(this.pos.x, this.pos.y, this.radius / 4, 0, Math.PI * 2, true);
+                this.canvas.closePath();
+                this.canvas.stroke();
+
+            }
 
 
 
         };
+
 
 
 
