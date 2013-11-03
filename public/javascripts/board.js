@@ -13,6 +13,8 @@ define(['jquery', 'checker'], function($, Checker) {
 
         this.canvas = undefined;
 
+        this.gameStatus = false;
+
         this.checkers = [],
 
         this.init = function(el) {
@@ -26,6 +28,11 @@ define(['jquery', 'checker'], function($, Checker) {
         this.setSocket = function(socket) {
             this.socket = socket;
         },
+        this.setGameStatus = function(gameStatus) {
+            this.gameStatus = gameStatus;
+        },
+
+
 
         this.updateCheckersPos = function(data) {
             for (var i = 0; i < data.own.length; i++) {
@@ -146,19 +153,23 @@ define(['jquery', 'checker'], function($, Checker) {
                 }
             }
 
+            if (!this.gameStatus) {
+                return ;
+            }
             $('.own').html(ownNumber);
             $('.rival').html(rivalNumber);
+//            $('.win').html('')
 
             if (ownNumber <= 0) {
-                $('.win').val('Наши победили')
+                $('.win').html('Наши победили')
             }
 
             if (rivalNumber <= 0) {
-                $('.win').val('Наши проиграли')
+                $('.win').html('Наши проиграли')
             }
 
             if (ownNumber <= 0 && rivalNumber <= 0) {
-                $('.win').val('Ничья!')
+                $('.win').html('Ничья!')
             }
 
         }
