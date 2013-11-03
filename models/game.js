@@ -45,14 +45,14 @@ var Game = function(players) {
       this.player1Positions.forEach(function (item) {
           var checkerId = self.world.addChecker(item[0], item[1], self.radius);
           var checker = new Checker(checkerId, item[0], item[1]);
-          self.checkersPlayer1[checkerId] = checker;
+          self.checkersPlayer1.push(checker);
       });
 
       // add player #2 checkers
       this.player2Positions.forEach(function (item) {
           var checkerId = self.world.addChecker(item[0], item[1], self.radius);
           var checker = new Checker(checkerId, item[0], item[1]);
-          self.checkersPlayer2[checkerId] = checker;
+          self.checkersPlayer2.push(checker);
       });
 
     this.players.forEach(function (player, index) {
@@ -101,8 +101,8 @@ var Game = function(players) {
 
   // update the game, should be called periodically on server
   this.update = function() {
-      console.log('Update checkers positions');
-      return;
+      //console.log('Update checkers positions');
+      //return;
       // update world
       this.world.update();
 
@@ -117,7 +117,14 @@ var Game = function(players) {
       // TODO: share updated info with clients
   };
 
-
+  this.end = function() {
+    var winId = 0;
+    if (this.checkersPlayer2.length) {
+      winId = 1;
+    }
+    //var winner = this.players[];
+    //var loser  = this.players[] 
+  };
 };
 
 module.exports = Game;
