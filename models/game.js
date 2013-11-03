@@ -58,7 +58,7 @@ var Game = function(players) {
 
     this.players.forEach(function (player, index) {
       player.statusUpdate("Rock'N'Roll");
-      player.socket.emit('game_start', 'start');
+      player.socket.emit('game_start', self.players[!index + 0].name);
       if (index) {
         player.sendUpdate(self.checkersPlayer2, self.checkersPlayer1);
       } else {
@@ -74,10 +74,10 @@ var Game = function(players) {
 
   // checks if coordinates are out of the box
   this.checkForBoundaries = function(x, y) {
-      if (x < -0.4 || x > 8.4 || y < -0.4 || y > 8.4) {
-         return false;
-      }
-      return true;
+    if (x < -0.4 || x > 8.4 || y < -0.4 || y > 8.4) {
+      return false;
+    }
+    return true;
   }
 
   //
