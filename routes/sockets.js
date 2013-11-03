@@ -9,6 +9,7 @@ var connect = require("connect");
 exports.initialize = function(server) {
   io = io.listen(server);
 
+  io.set('log level', 1);
   io.set('authorization', function (handshakeData, accept) {
 
     if (handshakeData.headers.cookie) {

@@ -109,11 +109,7 @@ var Game = function(players) {
 
   // update the game, should be called periodically on server
   this.update = function() {
-    console.log('Update checkers positions');
-
-    // update world
     this.world.update();
-
     // update checkers positions according to physics
     this.updatecheckers();
 
