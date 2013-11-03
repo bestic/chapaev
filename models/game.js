@@ -8,6 +8,7 @@ var Game = function(players) {
   this.checkersPlayer1 = [];
   this.checkersPlayer2 = [];
   this.updateTimeout = 50;
+  this.updateInterval = false;
 
 
   // game data
@@ -66,7 +67,7 @@ var Game = function(players) {
       player.game = self;
     });
 
-    setInterval(function() { self.update() }, this.updateTimeout);
+    this.updateInterval = setInterval(function() { self.update() }, this.updateTimeout);
   };
 
   this.init();
@@ -114,13 +115,6 @@ var Game = function(players) {
     this.updatecheckers();
 
     // Apply game rules
-
-    /*var player1Play = this.checkersPlayer1.some(function(el) {
-      return el.status;
-    });
-    var player2Play = this.checkersPlayer1.some(function(el) {
-      return el.status;
-    });*/
     var player1Lost = true;
     var player2Lost = true;
     this.checkersPlayer1.forEach(function(el, index) {
@@ -147,6 +141,7 @@ var Game = function(players) {
     }
     var winner = this.players[winId];
     var loser  = this.players[!winId + 0];
+    clearInterval(this.updateInterval);
     winner.socket.emit('game_end', { win: true, msg: 'You won! Congratulations!!!' });
     loser.socket.emit('game_end', { win: false, msg: 'You lose!' });
   };
