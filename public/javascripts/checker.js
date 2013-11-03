@@ -29,13 +29,11 @@ define(['paper'], function(paper){
                 this.setRadius(options.radius);
             }
 
-            if (options.id) {
+            if (typeof options.id !== 'undefined') {
                 this.id = options.id;
             }
 
-            if (options.status) {
-                this.status = options.status;
-            }
+            this.status = options.status;
 
             if (options.el) {
                 this.el = options.el;
@@ -46,8 +44,10 @@ define(['paper'], function(paper){
             }
 
             if (options.owner) {
+                this.owner = true;
                 this.color = '#F00';
             } else {
+                this.owner = false;
                 this.color = '#000';
             }
 

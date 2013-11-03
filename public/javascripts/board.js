@@ -76,6 +76,8 @@ define(['jquery', 'checker'], function($, Checker) {
                 }
             }
 
+            this.refreshScore();
+
             for (var i = 0; i < this.checkers.length; i++) {
                 this.checkers[i].setPos(this.transform(this.prevData[i].x, this.prevData[i].y));
                 this.checkers[i].setRadius(this.cellSize/2);
@@ -93,7 +95,10 @@ define(['jquery', 'checker'], function($, Checker) {
             }
 
             for (var i = 0; i < self.checkers.length; i++) {
-                if (self.distance(self.checkers[i].getPos(), pos) <= self.checkers[i].radius) {
+                if (self.checkers[i].owner &&
+                    self.checkers[i].status &&
+                    self.distance(self.checkers[i].getPos(), pos) <= self.checkers[i].radius) {
+
                     self.startPos = pos;
                     self.movedChecker = self.checkers[i].id;
                     break;
@@ -125,6 +130,38 @@ define(['jquery', 'checker'], function($, Checker) {
 
 
         },
+
+        this.refreshScore = function() {
+
+            var ownNumber = 0;
+            var rivalNumber = 0;
+
+            for (var i = 0; i < self.checkers.length; i++) {
+                if (self.checkers[i].status) {
+                    if (self.checkers[i].owner) {
+                        ownNumber++;
+                    } else {
+                        rivalNumber++;
+                    }
+                }
+            }
+
+            $('.own').html(ownNumber);
+            $('.rival').html(rivalNumber);
+
+            if (ownNumber <= 0) {
+                $('.win').val('Наши победили')
+            }
+
+            if (rivalNumber <= 0) {
+                $('.win').val('Наши проиграли')
+            }
+
+            if (ownNumber <= 0 && rivalNumber <= 0) {
+                $('.win').val('Ничья!')
+            }
+
+        }
 
         this.distance = function(pos1, pos2) {
             return Math.sqrt(Math.pow(pos1.x - pos2.x, 2) + Math.pow(pos1.y - pos2.y, 2));
