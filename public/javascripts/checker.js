@@ -45,6 +45,12 @@ define(['paper'], function(paper){
                 this.setCanvas(options.canvas);
             }
 
+            if (options.owner) {
+                this.color = '#F00';
+            } else {
+                this.color = '#000';
+            }
+
 
         };
 
@@ -75,7 +81,7 @@ define(['paper'], function(paper){
 
         this.reDraw = function() {
 
-            this.canvas.fillStyle = 'rgb(0,0,0)';
+            this.canvas.fillStyle = this.color;
             this.canvas.beginPath();
             this.canvas.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2, true);
             this.canvas.closePath();
