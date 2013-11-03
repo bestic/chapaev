@@ -58,7 +58,7 @@ var Game = function(players) {
 
     this.players.forEach(function (player, index) {
       player.statusUpdate("Rock'N'Roll");
-      player.socket.emit('game_start', self.players[!index + 0].name);
+      player.socket.emit('game_start', { name: self.players[!index + 0].name, player: index });
       if (index) {
         player.sendUpdate(self.checkersPlayer2, self.checkersPlayer1, 1);
       } else {
