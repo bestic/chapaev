@@ -39,6 +39,13 @@ World.prototype.addChecker = function(x, y, radius) {
     return index;
 }
 
+World.prototype.kickChecker = function(id, vector) {
+    this.items[id].ApplyImpulse(
+        new box2d.b2Vec2(vector.x, vector.y),
+        new box2d.b2Vec2(0, 0)
+    );
+}
+
 World.prototype.update = function() {
 
     // emulate restitution
