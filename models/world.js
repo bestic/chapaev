@@ -40,6 +40,9 @@ World.prototype.addChecker = function(x, y, radius) {
 }
 
 World.prototype.kickChecker = function(id, vector) {
+
+    console.log(id, vector);
+
     this.items[id].ApplyImpulse(
         new box2d.b2Vec2(vector.x, vector.y),
         new box2d.b2Vec2(0, 0)
@@ -60,7 +63,7 @@ World.prototype.update = function() {
 
     // update physics
     this.b2world.Step(
-        1 / 60      //frame-rate
+        1 / 5      //frame-rate
         ,  10       //velocity iterations
         ,  10       //position iterations
     );
