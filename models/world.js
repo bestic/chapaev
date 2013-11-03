@@ -45,6 +45,8 @@ World.prototype.kickChecker = function(id, vector) {
     var x = vector.x * force;
     var y = vector.y * force;
 
+    console.log(x, y);
+
     this.items[id].ApplyImpulse(
         new box2d.b2Vec2(x, y),
         new box2d.b2Vec2(0, 0)
