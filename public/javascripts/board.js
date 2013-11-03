@@ -34,13 +34,17 @@ define(['jquery', 'checker'], function($, Checker) {
             var pos = data.rival.concat(data.own);
             this.prevData = pos;
             this.checkers = [];
+            var out_count = 0;
             for (var i = 0; i < pos.length; i++) {
                 var checker = new Checker();
+                if (!pos[i].status) {
+                    out_count++;
+                }
                 checker.init({
                     'canvas': this.canvas,
                     'el': this.el,
                     'id': pos[i].id,
-                    'status': pos[i].ready,
+                    'status': pos[i].status,
                     'owner': pos[i].owner
 
                 });
@@ -48,6 +52,7 @@ define(['jquery', 'checker'], function($, Checker) {
                 checker.setPos(this.transform(pos[i].x, pos[i].y));
                 this.checkers.push(checker);
             }
+            console.log('out:' + out_count);
         },
 
         this.reDraw = function() {

@@ -73,9 +73,10 @@ var Game = function(players) {
 
   // checks if coordinates are out of the box
   this.checkForBoundaries = function(x, y) {
-      if (true) {
-
+      if (x < -0.4 || x > 8.4 || y < -0.4 || y > 8.4) {
+         return false;
       }
+      return true;
   }
 
   //
@@ -86,17 +87,22 @@ var Game = function(players) {
 
       var pos = item.GetPosition();
       var id  = item.GetUserData().id;
+      var status = self.checkForBoundaries(pos.x, pos.y);
+
       var ind = index % 8;
 
       if (index > 7) {
         self.checkersPlayer1[ind].x = pos.x;
         self.checkersPlayer1[ind].y = pos.y;
         self.checkersPlayer1[ind].id = id;
+        self.checkersPlayer1[ind].status = status;
       } else {
         self.checkersPlayer2[ind].x = pos.x;
         self.checkersPlayer2[ind].y = pos.y;
         self.checkersPlayer2[ind].id = id;
+        self.checkersPlayer2[ind].status = status;
       }
+
     });
 
   };

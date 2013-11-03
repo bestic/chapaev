@@ -1,6 +1,6 @@
 var Checker = function(id, x, y) {
     this.id = id;
-    this.ready = false;
+    this.status = false;
     this.x = x;
     this.y = y;
 }
