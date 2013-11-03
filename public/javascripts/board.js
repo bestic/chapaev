@@ -101,16 +101,18 @@ define(['jquery', 'checker'], function($, Checker) {
 
             if (self.startPos && self.startPos.x && self.startPos.y) {
 
-
-                pos = self.backTransform(self.startPos.x - event.clientX, self.startPos.y - event.clientY);
-
-                self.socket.emit('kick', {
+                var pos = self.backTransform(self.startPos.x - event.clientX, self.startPos.y - event.clientY);
+                var data = {
                     'vector': {
                         'x': pos.x,
                         'y': pos.y
                     },
                     'id': self.movedChecker
-                });
+                };
+
+                console.log(data);
+
+                self.socket.emit('kick', data);
 
                 self.startPos = null;
             }

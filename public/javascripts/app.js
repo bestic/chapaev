@@ -21,8 +21,8 @@ define(['canvas', 'jquery'], function(canvas, $) {
 
   socket.on('update', function(data) {
     canvas.board.updateCheckersPos(data);
-    console.log('Updated position');
-    console.log(data);
+    // console.log('Updated position');
+    // console.log(data);
     // TODO update checkers on board
   });
 });
