@@ -119,7 +119,7 @@ var Game = function(players) {
 
   this.end = function() {
     var winId = 0;
-    if (this.checkersPlayer2.length) {
+    if (this.checkersPlayer2.length > 0) {
       winId = 1;
     }
     var winner = this.players[winId];
