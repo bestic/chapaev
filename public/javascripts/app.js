@@ -16,7 +16,14 @@ define(['canvas', 'jquery', 'knob'], function(canvas, $, knob) {
   });
 
   socket.on('game_start', function(data) {
-    $('.oponent').html(data + " joined you in game");
+    $('.oponent').html(data.name + "has joined to your game");
+    if (!data.player) {
+        $('.yourcolor').html("Your color: Black");
+        $('.yourcolor').css("color", "black");
+    } else {
+        $('.yourcolor').html("Your color: Red");
+        $('.yourcolor').css("color", "red");
+    }
     console.log('Game started');
     $('.score').show();
     $('.indicator').show();
