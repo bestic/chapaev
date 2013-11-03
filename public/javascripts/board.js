@@ -33,10 +33,12 @@ define(['jquery', 'checker'], function($, Checker) {
                 var checker = new Checker();
                 checker.init({
                     'canvas': this.canvas,
-                    'el': this.el
+                    'el': this.el,
+                    'id': pos[i].id,
+                    'status': pos[i].ready
                 });
                 checker.setRadius(this.cellSize/2);
-                checker.setPos(this.transform(pos[i][0], pos[i][1]));
+                checker.setPos(this.transform(pos[i].x, pos[i].y));
                 this.checkers.push(checker);
             }
         },
@@ -81,7 +83,8 @@ define(['jquery', 'checker'], function($, Checker) {
             for (var i = 0; i < self.checkers.length; i++) {
                 if (self.distance(self.checkers[i].getPos(), pos) <= self.checkers[i].radius) {
                     self.startPos = pos;
-                    self.movedChecker = self.checker.id;
+                    self.movedChecker = self.checkers[i].id;
+                    break;
                 }
             }
 
@@ -90,10 +93,9 @@ define(['jquery', 'checker'], function($, Checker) {
         this.onMouseUp = function(event) {
 
             if (self.startPos && self.startPos.x && self.startPos.y) {
-                var deltaX = self.startPos.x - event.clientX;
-                var deltaY = self.startPos.y - event.clientY;
+                var deltaX = Math.abs(self.startPos.x - event.clientX);
+                var deltaY = Math.abs(self.startPos.y - event.clientY);
             }
-
 
         },
 

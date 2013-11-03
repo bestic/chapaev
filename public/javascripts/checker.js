@@ -29,6 +29,14 @@ define(['paper'], function(paper){
                 this.setRadius(options.radius);
             }
 
+            if (options.id) {
+                this.id = options.id;
+            }
+
+            if (options.status) {
+                this.status = options.status;
+            }
+
             if (options.el) {
                 this.el = options.el;
             }
