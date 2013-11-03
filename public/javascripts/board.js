@@ -23,6 +23,8 @@ define(['jquery', 'checker'], function($, Checker) {
 
             $(this.el).on('mousedown', this.onMouseDown);
             $(this.el).on('mouseup', this.onMouseUp);
+            $(this.el).on('mousemove', this.onMouseMove);
+            $(this.el).on('mouseout', this.onMouseOut);
         }
 
         this.setSocket = function(socket) {
@@ -92,6 +94,18 @@ define(['jquery', 'checker'], function($, Checker) {
                 this.checkers[i].reDraw();
             }
 
+            // Draw action vector if needed
+            if (this.dragging) {
+                this.canvas.strokeStyle = '#113f2d';
+
+                this.canvas.beginPath();
+                this.canvas.moveTo(self.checkers[self.movedId].getPos().x, self.checkers[self.movedId].getPos().y);
+                this.canvas.lineTo(self.dragTo.x, self.dragTo.y);
+                this.canvas.closePath();
+
+                this.canvas.stroke();
+            }
+
         },
 
         this.onMouseDown = function(event) {
@@ -108,15 +122,31 @@ define(['jquery', 'checker'], function($, Checker) {
 
                     self.startPos = pos;
                     self.movedChecker = self.checkers[i].id;
+                    self.movedId = i;
                     break;
                 }
             }
 
         },
 
+        this.onMouseMove = function(event) {
+            if (self.startPos && self.startPos.x && self.startPos.y) {
+
+                self.dragging = true;
+
+                self.dragTo = {
+                    x: event.clientX,
+                    y: event.clientY
+                }
+
+
+            }
+        },
+
         this.onMouseUp = function(event) {
 
             if (self.startPos && self.startPos.x && self.startPos.y) {
+                self.dragging = false;
                 var power = $('.power-indicator').val();
                 var pos = self.backTransform(self.startPos.x - event.clientX, self.startPos.y - event.clientY);
                 var data = {
@@ -127,15 +157,15 @@ define(['jquery', 'checker'], function($, Checker) {
                     'id': self.movedChecker
                 };
 
-                console.log(data);
-
                 self.socket.emit('kick', data);
 
                 self.startPos = null;
             }
 
+        },
 
-
+        this.onMouseOut = function() {
+            self.dragging = false;
         },
 
         this.refreshScore = function() {
