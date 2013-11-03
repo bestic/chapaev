@@ -97,7 +97,13 @@ define(['jquery', 'checker'], function($, Checker) {
 
             // Draw action vector if needed
             if (this.dragging) {
-                this.canvas.strokeStyle = '#113f2d';
+
+                var gradient = this.canvas.createRadialGradient(self.checkers[self.movedId].getPos().x, self.checkers[self.movedId].getPos().y, 4, self.dragTo.x, self.dragTo.y, 150);
+                gradient.addColorStop("0","white");
+                gradient.addColorStop("1.0","green");
+
+                this.canvas.strokeStyle = gradient;
+                this.canvas.lineWidth = 4;
 
                 this.canvas.beginPath();
                 this.canvas.moveTo(self.checkers[self.movedId].getPos().x, self.checkers[self.movedId].getPos().y);
