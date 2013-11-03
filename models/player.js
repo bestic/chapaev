@@ -5,6 +5,7 @@ var Player = function(socket) {
   this.socket = socket;
   this.status = 'not_ready';
   this.name   = '';
+  this.game   = null;
   this.movements = [];
   var player = this;
 
@@ -15,12 +16,13 @@ var Player = function(socket) {
         player.status = 'ready';
         console.log('Player set name as ' + name);
         player.statusUpdate("You're ready for fight. Wait a moment!");
+
         player.emit('ready', player);
       }
     });
 
     this.socket.on('kick', function(data) {
-      console.log('Player X made kick');
+      player.game.world.kickChecker(data.id, data.vector);
     });
   };
 

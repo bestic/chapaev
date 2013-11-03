@@ -63,6 +63,7 @@ var Game = function(players) {
       } else {
         player.sendUpdate(self.checkersPlayer1, self.checkersPlayer2);
       }
+      player.game = self;
     });
 
     setInterval(function() { self.update() }, this.updateTimeout);
