@@ -5,6 +5,8 @@ body {
   height: 100%;
   width: 100%;
   text-rendering: optimizelegibility;
+  min-width: 960px;
+  height: 700px;
 }
 
 .control-group {
