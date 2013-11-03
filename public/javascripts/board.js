@@ -54,7 +54,8 @@ define(['jquery', 'checker'], function($, Checker) {
                     'el': this.el,
                     'id': pos[i].id,
                     'status': pos[i].status,
-                    'owner': pos[i].owner
+                    'owner': pos[i].owner,
+                    'player': data.player
 
                 });
                 checker.setRadius(this.cellSize/2);

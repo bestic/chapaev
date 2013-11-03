@@ -43,6 +43,8 @@ define(['paper'], function(paper){
                 this.setCanvas(options.canvas);
             }
 
+            this.player = options.player;
+
             if (options.owner) {
                 this.owner = true;
 
@@ -85,7 +87,7 @@ define(['paper'], function(paper){
                 return;
             }
 
-            if (this.owner) {
+            if ((this.player && this.owner) || (!this.player && !this.owner)) {
 
                 this.canvas.fillStyle = '#F00';
                 this.canvas.beginPath();
