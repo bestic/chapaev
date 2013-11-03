@@ -41,10 +41,12 @@ World.prototype.addChecker = function(x, y, radius) {
 
 World.prototype.kickChecker = function(id, vector) {
 
-    console.log(id, vector);
+    var force = 300;
+    var x = vector.x * force;
+    var y = vector.y * force;
 
     this.items[id].ApplyImpulse(
-        new box2d.b2Vec2(vector.x, vector.y),
+        new box2d.b2Vec2(x, y),
         new box2d.b2Vec2(0, 0)
     );
 }
