@@ -65,7 +65,7 @@ define(['jquery', 'checker'], function($, Checker) {
             }
 
             for (var i = 0; i < this.checkers.length; i++) {
-                this.checkers[i].setPos(this.transform(this.prevData[i][0], this.prevData[i][1]));
+                this.checkers[i].setPos(this.transform(this.prevData[i].x, this.prevData[i].y));
                 this.checkers[i].setRadius(this.cellSize/2);
 
                 this.checkers[i].reDraw();
