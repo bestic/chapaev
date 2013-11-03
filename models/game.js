@@ -79,20 +79,20 @@ var Game = function(players) {
 
   //
   this.updatecheckers = function() {
-
+     var self = this;
      this.world.items.forEach(function(item, index){
 
-         var pos = item.getPosition();
+         var pos = item.GetPosition();
 
          // ugly check, improve in the future
-         if (this.checkersPlayer1[index]) {
-             this.checkersPlayer1[index].x = pos.x;
-             this.checkersPlayer1[index].y = pos.y;
+         if (typeof self.checkersPlayer1[index] !== 'undefined') {
+             self.checkersPlayer1[index].x = pos.x;
+             self.checkersPlayer1[index].y = pos.y;
          }
 
-         if (this.checkersPlayer2[index]) {
-             this.checkersPlayer2[index].x = pos.x;
-             this.checkersPlayer2[index].y = pos.y;
+         if (typeof self.checkersPlayer2[index] !== 'undefined') {
+             self.checkersPlayer2[index].x = pos.x;
+             self.checkersPlayer2[index].y = pos.y;
          }
 
      });
@@ -101,8 +101,8 @@ var Game = function(players) {
 
   // update the game, should be called periodically on server
   this.update = function() {
-      //console.log('Update checkers positions');
-      //return;
+      console.log('Update checkers positions');
+
       // update world
       this.world.update();
 
