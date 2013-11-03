@@ -99,13 +99,13 @@ define(['jquery', 'checker'], function($, Checker) {
 
                 pos = self.backTransform(self.startPos.x - event.clientX, self.startPos.y - event.clientY);
 
-                self.socket.emit('kick', JSON.stringify({
+                self.socket.emit('kick', {
                     'vector': {
                         'x': pos.x,
                         'y': pos.y
                     },
                     'id': self.movedChecker
-                }));
+                });
 
                 self.startPos = null;
             }
