@@ -7,7 +7,7 @@ var Game = function(players) {
   this.world = null;
   this.checkersPlayer1 = [];
   this.checkersPlayer2 = [];
-  this.updateTimeout = 200;
+  this.updateTimeout = 2000;
 
 
   // game data
