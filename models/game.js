@@ -60,9 +60,9 @@ var Game = function(players) {
       player.statusUpdate("Rock'N'Roll");
       player.socket.emit('game_start', self.players[!index + 0].name);
       if (index) {
-        player.sendUpdate(self.checkersPlayer2, self.checkersPlayer1);
+        player.sendUpdate(self.checkersPlayer2, self.checkersPlayer1, 1);
       } else {
-        player.sendUpdate(self.checkersPlayer1, self.checkersPlayer2);
+        player.sendUpdate(self.checkersPlayer1, self.checkersPlayer2, 0);
       }
       player.game = self;
     });
@@ -127,8 +127,8 @@ var Game = function(players) {
         player2Lost = false;
       }
     });
-    this.players[0].sendUpdate(this.checkersPlayer1, this.checkersPlayer2);
-    this.players[1].sendUpdate(this.checkersPlayer2, this.checkersPlayer1);
+    this.players[0].sendUpdate(this.checkersPlayer1, this.checkersPlayer2, 0);
+    this.players[1].sendUpdate(this.checkersPlayer2, this.checkersPlayer1, 1);
     if (player1Lost || player2Lost) {
       this.end(player1Lost, player2Lost)
     }

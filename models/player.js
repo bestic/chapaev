@@ -33,8 +33,8 @@ var Player = function(socket, callback) {
     this.movements.push(movement);
   };
 
-  this.sendUpdate = function(checkers, rivalCheckers) {
-    this.socket.emit('update', { own: checkers, rival: rivalCheckers });
+  this.sendUpdate = function(checkers, rivalCheckers, pl) {
+    this.socket.emit('update', { own: checkers, rival: rivalCheckers, player: pl });
   };
 
   this.init();
