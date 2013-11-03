@@ -44,7 +44,6 @@ World.prototype.kickChecker = function(id, vector) {
     var force = 300;
     var x = vector.x * force;
     var y = vector.y * force;
-
     console.log(x, y);
 
     this.items[id].ApplyImpulse(
