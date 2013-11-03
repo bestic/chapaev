@@ -7,7 +7,9 @@
     "express": "3.x",
     "jade": "*",
     "socket.io": "latest",
-    "box2dweb-commonjs": "latest"
+    "box2dweb-commonjs": "latest",
+    "cookie": "latest",
+    "connect": "latest"
   },
   "scripts" : {
     "start": "node app.js"

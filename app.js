@@ -5,6 +5,9 @@ var express = require('express')
 var app = express();
 var server = app.listen(3000);
 var models = require('./models');
+var MemoryStore = express.session.MemoryStore;
+var sessionStore = new MemoryStore();
+
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
@@ -13,6 +16,9 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.static(__dirname + '/public'));
   app.use(express.bodyParser());
+  app.use(express.cookieParser());
+  app.use(express.session({store: sessionStore, secret: 'secret', key: 'express.sid'}));
+
   app.use(express.methodOverride());
   app.use(app.router);
 });
