@@ -16,7 +16,7 @@ define(['canvas', 'jquery', 'knob'], function(canvas, $, knob) {
   });
 
   socket.on('game_start', function(data) {
-    $('.oponent').html(data.name + "has joined to your game");
+    $('.oponent').html(data.name + " has joined to your game");
     if (!data.player) {
         $('.yourcolor').html("Your color: Black");
         $('.yourcolor').css("color", "black");
