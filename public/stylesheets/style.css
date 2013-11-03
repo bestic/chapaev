@@ -42,3 +42,15 @@ body {
 .rival {
     color: black;
 }
+
+.status {
+    font-size: 20px;
+}
+
+.win {
+    color: red;
+}
+
+.loose {
+    color: green
+}

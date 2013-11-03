@@ -24,6 +24,16 @@ define(['canvas', 'jquery'], function(canvas, $) {
   socket.on('game_end', function(data) {
     console.log('Game ended');
     // TODO enable board for interaction
+    if (data.win) {
+        $('.result').addClass('win');
+        $('.result').removeClass('loose');
+    } else {
+        $('.result').addClass('loose');
+        $('.result').removeClass('win');
+    }
+
+    $('.result').html(data.msg);
+
   });
 
   socket.on('update', function(data) {
