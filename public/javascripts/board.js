@@ -24,6 +24,9 @@ define(['jquery', 'checker'], function($, Checker) {
             $(this.el).on('mouseout', this.onMouseUp);
         }
 
+        this.setSocket = function(socket) {
+            this.socket = socket;
+        },
 
         this.updateCheckersPos = function(data) {
             var pos = data.rival.concat(data.own);
@@ -93,9 +96,22 @@ define(['jquery', 'checker'], function($, Checker) {
         this.onMouseUp = function(event) {
 
             if (self.startPos && self.startPos.x && self.startPos.y) {
-                var deltaX = Math.abs(self.startPos.x - event.clientX);
-                var deltaY = Math.abs(self.startPos.y - event.clientY);
+
+                var pos = {
+                    x: Math.abs(self.startPos.x - event.clientX),
+                    y: Math.abs(self.startPos.y - event.clientY)
+                }
+
+                pos = self.backTransform(pos);
+
+                this.socket.emit('kick', JSON.stringify({
+                    'x': pos.x,
+                    'y': pos.y,
+                    'id': self.movedChecker
+                }));
             }
+
+
 
         },
 
@@ -107,6 +123,18 @@ define(['jquery', 'checker'], function($, Checker) {
             
             var resX = x * this.cellSize + this.pos.x;
             var resY = y * this.cellSize + this.pos.y;
+
+            return {
+                x: resX,
+                y: resY
+            }
+
+        },
+
+        this.backTransform = function(x, y) {
+
+            var resX = (x - this.pos.x) / this.cellSize;
+            var resY = (y - this.pos.y) / this.cellSize;
 
             return {
                 x: resX,

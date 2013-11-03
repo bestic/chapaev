@@ -15,6 +15,7 @@ define(['canvas', 'jquery'], function(canvas, $) {
   socket.on('game_start', function(data) {
     console.log('Game started');
     // TODO enable board for interaction
+    canvas.board.setSocket(socket);
   });
 
   socket.on('update', function(data) {
