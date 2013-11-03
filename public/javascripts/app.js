@@ -3,6 +3,8 @@ define(['canvas', 'jquery'], function(canvas, $) {
   var socket   = io.connect()
     , statusEl = $('#game_status');
 
+  canvas.board.setSocket(socket);
+
   $('#set-name').on('click', function(el) {
     socket.emit('set_name', $('#player_name').val());
   });
@@ -15,7 +17,7 @@ define(['canvas', 'jquery'], function(canvas, $) {
   socket.on('game_start', function(data) {
     console.log('Game started');
     // TODO enable board for interaction
-    canvas.board.setSocket(socket);
+
   });
 
   socket.on('update', function(data) {
