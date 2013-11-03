@@ -18,12 +18,21 @@ body {
 .game-status {
   color: green;
   margin: 10px 0;
-  font-size: 12px;
+  font-size: 16px;
   font-family: Arial;
 }
 
 .score {
     font-size: 24px;
+}
+
+.logo {
+  background-image: url(../images/logo.jpg);
+  height: 174px;
+  width: 288px;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .own {

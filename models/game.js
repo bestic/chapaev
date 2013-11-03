@@ -115,22 +115,40 @@ var Game = function(players) {
 
     // Apply game rules
 
-    // TODO: check for checkers out of game board
-    // TODO: check for checkers that just have stopped, and pass it to the next turn
-
+    /*var player1Play = this.checkersPlayer1.some(function(el) {
+      return el.status;
+    });
+    var player2Play = this.checkersPlayer1.some(function(el) {
+      return el.status;
+    });*/
+    var player1Lost = true;
+    var player2Lost = true;
+    this.checkersPlayer1.forEach(function(el, index) {
+      if (el.status) {
+        player1Lost = false;
+      }
+    });
+    this.checkersPlayer2.forEach(function(el, index) {
+      if (el.status) {
+        player2Lost = false;
+      }
+    });
     this.players[0].sendUpdate(this.checkersPlayer1, this.checkersPlayer2);
     this.players[1].sendUpdate(this.checkersPlayer2, this.checkersPlayer1);
+    if (player1Lost || player2Lost) {
+      this.end(player1Lost, player2Lost)
+    }
   };
 
-  this.end = function() {
+  this.end = function(pl1Lost, pl2Lost) {
     var winId = 0;
-    if (this.checkersPlayer2.length > 0) {
+    if (pl1Lost) {
       winId = 1;
     }
     var winner = this.players[winId];
     var loser  = this.players[!winId + 0];
-    winner.socket.on('game_end', 'You won! Congratulations!!!');
-    loser.socket.on('game_end', 'You lose!');
+    winner.socket.emit('game_end', { win: true, msg: 'You won! Congratulations!!!' });
+    loser.socket.emit('game_end', { win: false, msg: 'You lose!' });
   };
 };
 

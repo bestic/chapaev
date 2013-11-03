@@ -19,6 +19,11 @@ define(['canvas', 'jquery'], function(canvas, $) {
     // TODO enable board for interaction
   });
 
+  socket.on('game_end', function(data) {
+    console.log('Game ended');
+    // TODO enable board for interaction
+  });
+
   socket.on('update', function(data) {
     canvas.board.updateCheckersPos(data);
     // console.log('Updated position');
