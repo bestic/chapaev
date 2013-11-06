@@ -3,7 +3,7 @@ var express = require('express')
   , http = require('http');
 
 var app = express();
-var server = app.listen(3000);
+var server = app.listen(process.env.PORT || 3000)
 var models = require('./models');
 var MemoryStore = express.session.MemoryStore;
 var sessionStore = new MemoryStore();
